@@ -1,0 +1,25 @@
+public record Product(String name, double price) {
+    // Compact constructor for validation
+    public Product {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Product name cannot be empty.");
+        }
+        if (price <= 0) {
+            throw new IllegalArgumentException("Product price must be positive.");
+        }
+    }
+}
+
+public class MainWithValidation {
+    public static void main(String[] args) {
+        try {
+            Product validProduct = new Product("Laptop", 1200.00);
+            System.out.println(validProduct);
+
+            // This will throw an IllegalArgumentException
+            // Product invalidProduct = new Product("", -50.00);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error creating product: " + e.getMessage());
+        }
+    }
+}

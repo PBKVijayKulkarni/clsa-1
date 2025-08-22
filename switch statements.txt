@@ -1,0 +1,73 @@
+public class DayOfWeek {
+    public static void main(String[] args) {
+        int dayNumber = 3;
+        String dayName = switch (dayNumber) {
+            case 1 -> "Monday";
+            case 2 -> "Tuesday";
+            case 3 -> "Wednesday";
+            case 4 -> "Thursday";
+            case 5 -> "Friday";
+            case 6 -> "Saturday";
+            case 7 -> "Sunday";
+            default -> "Invalid day";
+        };
+        System.out.println("Today is " + dayName); // Output: Today is Wednesday
+    }
+}
+
+
+public class WeekendCheck {
+    public static void main(String[] args) {
+        String day = "Saturday";
+        String message = switch (day) {
+            case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" -> "It's a weekday!";
+            case "Saturday", "Sunday" -> "Enjoy the weekend!";
+            default -> "Unknown day";
+        };
+        System.out.println(message); // Output: Enjoy the weekend!
+    }
+}
+
+public class DiscountCalculator {
+    public static void main(String[] args) {
+        String productCategory = "Electronics";
+        double discount = switch (productCategory) {
+            case "Electronics" -> {
+                System.out.println("Applying electronics discount.");
+                yield 0.10; // 10% discount
+            }
+            case "Clothing" -> {
+                System.out.println("Applying clothing discount.");
+                yield 0.15; // 15% discount
+            }
+            default -> {
+                System.out.println("No specific discount.");
+                yield 0.0;
+            }
+        };
+        System.out.println("Discount: " + (discount * 100) + "%"); // Output: Applying electronics discount. Discount: 10.0%
+    }
+}
+
+
+public class ShapeProcessor {
+    public static void processShape(Object shape) {
+        switch (shape) {
+            case Circle c -> System.out.println("Processing a Circle with radius: " + c.radius());
+            case Rectangle r -> System.out.println("Processing a Rectangle with width: " + r.width() + " and height: " + r.height());
+            case null -> System.out.println("Input is null.");
+            default -> System.out.println("Unknown shape type.");
+        }
+    }
+
+    // Example record classes for demonstration
+    record Circle(double radius) {}
+    record Rectangle(double width, double height) {}
+
+    public static void main(String[] args) {
+        processShape(new Circle(5.0));
+        processShape(new Rectangle(4.0, 6.0));
+        processShape("Hello");
+        processShape(null);
+    }
+}

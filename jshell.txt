@@ -1,0 +1,32 @@
+jshell> int i = 10
+i ==> 10
+
+jshell> String name = "Mahesh";
+name ==> "Mahesh"
+
+jshell> Date date = new Date()
+date ==> Fri Feb 02 14:52:49 IST 2024
+
+jshell> long l
+l ==> 0
+
+jshell> List list
+list ==> null
+
+jshell> name
+name ==> "Mahesh"
+
+
+jshell> String.format("%d pages read.", 10);
+$9 ==> "10 pages read."
+
+jshell> $9
+$9 ==> "10 pages read."
+
+/drop – This command drops code snippets identified by name, ID, or ID range.
+/edit – This command opens an editor.
+/env – This command displays the environment settings.
+/exit – This command exists from the tool.
+/history – This command displays the history of the tool.
+/help – This command displays the command's help.
+/imports – This command displays the current active imports.

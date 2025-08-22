@@ -1,0 +1,37 @@
+public sealed interface Vehicle permits LandVehicle, SeaVehicle {
+   void start();
+}
+
+non-sealed interface LandVehicle extends Vehicle {
+       void drive();
+}
+
+non-sealed interface SeaVehicle extends Vehicle {
+       void navigate();
+}
+
+class Car implements LandVehicle {
+   
+   @Override
+   public void start() {
+      System.out.println("Car starting...");
+   }
+
+   @Override
+   public void drive() {
+      System.out.println("Car is driving...");
+   }
+}
+
+class Ship implements SeaVehicle {
+
+   @Override
+   public void start() {
+      System.out.println("Ship starting...");
+   }
+
+   @Override
+   public void navigate() {
+      System.out.println("Ship is navigating...");
+   }
+}

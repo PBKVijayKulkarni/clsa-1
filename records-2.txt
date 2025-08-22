@@ -1,0 +1,19 @@
+public record Book(String title, String author, int yearPublished) {}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating an instance of the Book record
+        Book book1 = new Book("The Lord of the Rings", "J.R.R. Tolkien", 1954);
+
+        // Accessing components (fields) using accessor methods
+        System.out.println("Title: " + book1.title());
+        System.out.println("Author: " + book1.author());
+        System.out.println("Year Published: " + book1.yearPublished());
+
+        // Automatic toString() implementation
+        System.out.println(book1); // Output: Book[title=The Lord of the Rings, author=J.R.R. Tolkien, yearPublished=1954]
+
+        // Immutability: Cannot change components after creation
+        // book1.title = "New Title"; // This would be a compilation error
+    }
+}

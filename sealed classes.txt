@@ -1,0 +1,103 @@
+// Sealed class declaration
+public sealed class Shape permits Circle, Rectangle, Triangle {
+    public String description() {
+        return "This is a generic shape.";
+    }
+}
+
+// Permitted subclass - final
+public final class Circle extends Shape {
+    private final double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    @Override
+    public String description() {
+        return "This is a circle with radius " + radius + ".";
+    }
+}
+
+// Permitted subclass - sealed
+public sealed class Rectangle extends Shape permits Square {
+    private final double width;
+    private final double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    @Override
+    public String description() {
+        return "This is a rectangle with width " + width + " and height " + height + ".";
+    }
+}
+
+// Permitted subclass of Rectangle - non-sealed
+public non-sealed class Square extends Rectangle {
+    public Square(double side) {
+        super(side, side);
+    }
+
+    @Override
+    public String description() {
+        return "This is a square with side " + getWidth() + ".";
+    }
+}
+
+// Permitted subclass - non-sealed
+public non-sealed class Triangle extends Shape {
+    private final double base;
+    private final double height;
+
+    public Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    public double getBase() {
+        return base;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    @Override
+    public String description() {
+        return "This is a triangle with base " + base + " and height " + height + ".";
+    }
+}
+
+// Main class to demonstrate usage
+public class SealedClassExample {
+    public static void main(String[] args) {
+        Shape circle = new Circle(5.0);
+        Shape rectangle = new Rectangle(4.0, 6.0);
+        Shape square = new Square(7.0);
+        Shape triangle = new Triangle(3.0, 8.0);
+
+        System.out.println(circle.description());
+        System.out.println(rectangle.description());
+        System.out.println(square.description());
+        System.out.println(triangle.description());
+
+        // Attempting to extend Shape with an unpermitted class would result in a compile-time error.
+        // For example:
+        // class Pentagon extends Shape { /* ... */ } // This would cause a compilation error.
+    }
+}
