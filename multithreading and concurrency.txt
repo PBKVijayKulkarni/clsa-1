@@ -1,0 +1,84 @@
+// Creating a thread by extending Thread class
+class MyThread extends Thread {
+    public void run() {
+        // Thread logic here
+    }
+}
+
+// Creating a thread by implementing Runnable interface
+class MyRunnable implements Runnable {
+    public void run() {
+        // Thread logic here
+    }
+}
+
+// Main application
+public class ThreadCreationExample {
+    public static void main(String[] args) {
+        MyThread thread1 = new MyThread();
+        Thread thread2 = new Thread(new MyRunnable());
+
+        thread1.start(); // Start the thread
+        thread2.start(); // Start the thread
+    }
+}
+
+
+class SharedResource {
+    private int counter = 0;
+
+    public synchronized void increment() {
+        counter++;
+    }
+}
+
+public class SynchronizationExample {
+    public static void main(String[] args) {
+        SharedResource resource = new SharedResource();
+
+        Thread thread1 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                resource.increment();
+            }
+        });
+
+        Thread thread2 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                resource.increment();
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Counter value: " + resource.getCounter());
+    }
+}
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorServiceExample {
+    public static void main(String[] args) {
+        // Create a fixed-size thread pool with 4 threads
+        ExecutorService executor = Executors.newFixedThreadPool(4);
+
+        // Submit tasks to the executor
+        for (int i = 0; i < 10; i++) {
+            final int taskNumber = i;
+            executor.execute(() -> {
+                System.out.println("Task " + taskNumber + " executed by thread " + Thread.currentThread().getName());
+            });
+        }
+
+        // Shutdown the executor when tasks are done
+        executor.shutdown();
+    }
+}
